@@ -1,15 +1,24 @@
 package org.rak.scrappers
 
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
-@CrossOrigin(origins = ["*"])
 @RestController
+@CrossOrigin(origins = ["*"])
+@RequestMapping("bot")
 class BotController {
 
-    @GetMapping("/bot")
+    @GetMapping
     fun getBot(): Bot {
+        return State.bot
+    }
+
+    @PutMapping("/part")
+    fun equipPart(partId: String): Bot {
+        val part = Resources.getPart(partId)
+        if (part != null){
+            State.bot.attemptEquip(part)
+        }
+
         return State.bot
     }
 }
