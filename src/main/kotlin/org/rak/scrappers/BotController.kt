@@ -1,5 +1,6 @@
 package org.rak.scrappers
 
+import org.rak.scrappers.network.SimplifiedBot
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -8,17 +9,17 @@ import org.springframework.web.bind.annotation.*
 class BotController {
 
     @GetMapping
-    fun getBot(): Bot {
-        return State.bot
+    fun getBot(): SimplifiedBot {
+        return SimplifiedBot(State.bot)
     }
 
     @PutMapping("/part")
-    fun equipPart(partId: String): Bot {
+    fun equipPart(partId: String): SimplifiedBot {
         val part = Resources.getPart(partId)
         if (part != null){
             State.bot.attemptEquip(part)
         }
 
-        return State.bot
+        return getBot()
     }
 }
