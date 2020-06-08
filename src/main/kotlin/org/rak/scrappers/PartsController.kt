@@ -1,28 +1,26 @@
 package org.rak.scrappers
 
+import io.swagger.annotations.ApiModelProperty
 import org.rak.scrappers.parts.Part
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.rak.scrappers.parts.PartType
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.client.HttpClientErrorException
+import org.springframework.web.server.ResponseStatusException
 
 @RestController
 @CrossOrigin(origins = ["*"])
 @RequestMapping("part")
 class PartsController {
 
-    @GetMapping("/head")
-    fun getHeads(): List<Part> {
-        return Resources.heads.values.toList()
+    @GetMapping
+    fun getPart(@RequestParam id: String): Part {
+        return Resources.getPart(id) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
 
-    @GetMapping("/arm")
-    fun getArms(): List<Part> {
-        return Resources.arms.values.toList()
+    @GetMapping("/all")
+    fun getParts(@RequestParam(required = false) type: PartType?): List<Part> {
+        return Resources.getParts(type)
     }
 
-    @GetMapping("/leg")
-    fun getLegs(): List<Part> {
-        return Resources.legs.values.toList()
-    }
 }

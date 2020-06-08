@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fly_head",
+    "name": "Compound Eyes",
+    "totalHealth": 18,
+    "type": "HEAD"
+  },
+  {
+    "id": "fly_left_arm",
+    "name": "Winged Left Arm",
+    "totalHealth": 10,
+    "type": "LEFT_ARM"
+  },
+  {
+    "id": "fly_right_arm",
+    "name": "Winged Right Arm",
+    "totalHealth": 10,
+    "type": "RIGHT_ARM"
+  },
+  {
+    "id": "fly_legs",
+    "name": "Spindly Legs",
+    "totalHealth": 15,
+    "type": "LEGS"
+  }
+]
