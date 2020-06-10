@@ -36,4 +36,8 @@ object Resources {
         }
     }
 
+    fun getOwnedParts(type: PartType?): Map<String, Int> {
+        return mapOf()
+    }
+
 }
