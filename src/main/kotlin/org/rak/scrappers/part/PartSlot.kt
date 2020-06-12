@@ -1,13 +1,12 @@
-package org.rak.scrappers
-
-import org.rak.scrappers.parts.Part
-import org.rak.scrappers.parts.PartType
+package org.rak.scrappers.part
 
 class PartSlot(private val type: PartType, var part: Part) {
-    fun attemptEquip(part: Part) {
+    fun attemptEquip(part: Part) : Boolean {
         if (canEquip(part)){
             this.part = part
+            return true
         }
+        return false
     }
 
     private fun canEquip(part: Part) : Boolean {

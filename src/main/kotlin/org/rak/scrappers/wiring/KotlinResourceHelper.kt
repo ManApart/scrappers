@@ -1,4 +1,4 @@
-package org.rak.scrappers
+package org.rak.scrappers.wiring
 
 import java.net.URI
 import java.nio.file.FileSystems

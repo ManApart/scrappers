@@ -1,7 +1,7 @@
 package org.rak.scrappers.network
 
-import org.rak.scrappers.PartSlot
-import org.rak.scrappers.parts.Part
+import org.rak.scrappers.part.PartSlot
+import org.rak.scrappers.part.Part
 
 data class SimplifiedPart(val id: String, val health: Int){
     constructor(part: Part) : this(part.id, part.health)

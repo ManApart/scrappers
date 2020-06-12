@@ -1,4 +1,4 @@
-package org.rak.scrappers
+package org.rak.scrappers.wiring
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -11,7 +11,6 @@ import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
-
 @Configuration
 @EnableSwagger2
 class SwaggerConfig {
@@ -22,14 +21,13 @@ class SwaggerConfig {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
+                .apiInfo(apiInfo());
     }
 
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
-                .title("Spring Boot2.X Kotlin Use in Swagger2 structure RESTFul APIs")
-                .description("More SpringBoot2.X Kotlin Pay attention to the article:Cherish fish blog")
-                .termsOfServiceUrl("https://www.intodream.io")
-                .contact(Contact("Cherish fish", "https://www.tisnz.com", "xmsjgzs@163.com"))
+                .title("Scrappers Swagger")
+                .description("Used to map the back end logic etc to a front end.")
                 .version("1.0.0")
                 .build()
     }

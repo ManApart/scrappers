@@ -1,4 +1,4 @@
-package org.rak.scrappers
+package org.rak.scrappers.wiring
 
 object JsonDirectoryParser {
 

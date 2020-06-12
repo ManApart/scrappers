@@ -1,4 +1,4 @@
-package org.rak.scrappers.parts
+package org.rak.scrappers.part
 
 enum class PartType {
     HEAD,
