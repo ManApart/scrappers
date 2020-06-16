@@ -26,4 +26,5 @@ class BotController {
 
         return EquipResponse(success, getBot())
     }
+
 }
