@@ -10,13 +10,20 @@ val DEFAULT_RIGHT_ARM = Part("basic_right_arm", "Basic Right Arm", PartType.RIGH
 val DEFAULT_LEGS = Part("basic_legs", "Basic Legs", PartType.LEGS, 10)
 
 
-class Part(val id: String, val name: String, val type: PartType, val totalHealth: Int = 25, val energy: Int = 25, val speed: Int = 25, val moveIds: List<String> = listOf()) {
+class Part(val id: String, val name: String, val type: PartType, val totalHealth: Int = 25, val energy: Int = 25, val speed: Int = 25, val moveId: String? = null) {
     var health = totalHealth
 
-    private val moveList by lazy { moveIds.mapNotNull { Resources.moves[it] } }
+    private val partMove by lazy { lookupMove() }
 
     @JsonIgnore
-    fun getMoves() : List<Move> {
-        return moveList
+    fun getMove() : Move? {
+        return partMove
+    }
+
+    private fun lookupMove() : Move? {
+        if (moveId != null){
+            return Resources.moves[moveId]
+        }
+        return null
     }
 }
