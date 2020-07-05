@@ -2,9 +2,10 @@ package org.rak.scrappers.bot
 
 import org.rak.scrappers.Resources
 import org.rak.scrappers.State
-import org.rak.scrappers.network.EquipResponse
 import org.rak.scrappers.network.SimplifiedBot
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 
 @RestController
 @CrossOrigin(origins = ["*"])
@@ -12,19 +13,27 @@ import org.springframework.web.bind.annotation.*
 class BotController {
 
     @GetMapping
-    fun getBot(): SimplifiedBot {
+    fun getBots(): List<SimplifiedBot> {
+        return State.bots.values.map { SimplifiedBot(it) }
+    }
+
+    @GetMapping("/player")
+    fun getPlayerBot(): SimplifiedBot {
         return SimplifiedBot(State.bot)
     }
 
-    @PutMapping("/part")
-    fun equipPart(partId: String): EquipResponse {
-        var success = false
-        val part = Resources.parts[partId]
-        if (part != null){
-            success = State.bot.attemptEquip(part)
-        }
+    @GetMapping("/{id}")
+    fun getBot(@PathVariable id: String): SimplifiedBot {
+        return SimplifiedBot(State.bots[id] ?: throw ResponseStatusException(HttpStatus.NOT_FOUND))
+    }
 
-        return EquipResponse(success, getBot())
+    @PutMapping("{id}/part")
+    fun equipPart(@PathVariable botID: String, partId: String): SimplifiedBot {
+        val bot = State.bots[botID] ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "No bot found for $botID")
+        val part = Resources.parts[partId] ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "No bot found for $botID")
+        bot.attemptEquip(part)
+
+        return SimplifiedBot(bot)
     }
 
 }

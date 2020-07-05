@@ -1,6 +1,8 @@
 package org.rak.scrappers.part
 
 class PartSlot(private val type: PartType, var part: Part) {
+    var health: Int = part.totalHealth
+
     fun attemptEquip(part: Part) : Boolean {
         if (canEquip(part)){
             this.part = part
