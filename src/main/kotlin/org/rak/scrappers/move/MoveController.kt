@@ -1,9 +1,6 @@
 package org.rak.scrappers.move
 
 import org.rak.scrappers.Resources
-import org.rak.scrappers.State
-import org.rak.scrappers.network.EquipResponse
-import org.rak.scrappers.network.SimplifiedBot
 import org.springframework.web.bind.annotation.*
 
 @RestController
